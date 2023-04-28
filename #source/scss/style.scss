@@ -1,0 +1,490 @@
+//------------------------------------ Scss фишки ------------------------------------------
+//	ПЕРЕМЕННЫЕ
+$fz: 80px;
+$color1: black;
+$color2: rgb(255, 255, 255);
+
+// ШАБЛОНЫ - Подключаем с помощью << @extend >>
+%tplborder {
+	border-bottom: 5px dashed red;
+	font-size: 150px;
+}
+// МИКСИНЫ - Подключаем с помощью << @include >>
+@mixin fontz($f, $c, $lh) {
+	font-size: $f;
+	color: $c;
+	line-height: $lh;
+}
+//========================(Место для миксинов, шаблонов и переменных)=======================
+@mixin flexbox() {
+	//@include flexbox();
+	display: flex;
+	font-size: 0;
+}
+
+// МИНИМАЛЬНАЯ ШИРИНА >===========================================================
+$minwidth: 320px;
+//--------------------------------------------------------------------------------
+
+// подключаем ШРИФТЫ >============================================================
+@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
+// Шрифты по умолчанию>
+$fontfamily: "Lato";
+//--------------------------------------------------------------------------------
+
+// ОБНУЛЕНИЕ>=====================================================================
+@import "null-style.scss";
+
+// IBG>===========================================================================
+.ibg {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+.ibg img {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	visibility: hidden;
+}
+//________________________________________________________________________________
+// (=^-^)= Обучайся, развтвайся и помни: ЖИВИ! а работай в свободное время =(^-^=)
+
+body {
+	@media (max-width: 767px) {
+		&.lock {
+			overflow: hidden;
+		}
+	}
+}
+
+//Оболочка>======================================================================
+.wrapper {
+	overflow: hidden;
+	min-height: 100%;
+}
+//-------------------------------------------------------------------------------
+
+//Основная сетка>================================================================
+.container {
+	max-width: 1130px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+//-------------------------------------------------------------------------------
+
+//HEADER блок>===================================================================
+@import "header.scss";
+//Основной блок>=================================================================
+.page {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	@include flexbox();
+	flex-direction: column;
+}
+.main-screen {
+	flex: 1 0 100%;
+	position: relative;
+	&__bg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+	}
+}
+//==============================================================================
+.content {
+	font-size: 14px;
+}
+//==============================================================================
+.geniration {
+	padding: 120px 0;
+	background-color: #f7f7f7;
+	@media (max-width: 900px) {
+		padding: 80px 0;
+	}
+	@media (max-width: 600px) {
+		padding: 30px 0;
+	}
+}
+//==============================================================================
+.block {
+	text-align: center;
+	&__icon {
+		margin: 0 0 33px 0;
+	}
+	&__title {
+		color: #353738;
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 24px;
+		text-transform: uppercase;
+		letter-spacing: 3.6px;
+		margin: 0 0 16px 0;
+	}
+	&__text {
+		color: #848789;
+		font-size: 18px;
+		line-height: 34px;
+		&-j {
+			text-align: justify;
+			font-size: 16px;
+			line-height: 30px;
+			&::after {
+				content: "";
+				width: 50px;
+				height: 1px;
+				background-color: #24191969;
+				display: block;
+				margin: 35px auto 0 auto;
+			}
+		}
+	}
+	@media (max-width: 1500px) {
+		&__text {
+			&-j {
+				&::after {
+					margin: 15px auto 0 auto;
+				}
+			}
+		}
+	}
+}
+//Брэнд основной блок>===========================================================
+.brends {
+	&-rev {
+		.brends__column {
+			order: 1;
+			&-b {
+				order: 2;
+			}
+		}
+	}
+	&__row {
+		@include flexbox();
+	}
+	&__column {
+		flex: 0 1 33.333%;
+		&-b {
+			flex: 0 1 66.667%;
+		}
+	}
+	&__content {
+		padding: 70px 65px 55px 65px;
+		position: relative;
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			margin: 0 0 0 -10px;
+			z-index: 2;
+			width: 0;
+			height: 0;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-top: 10px solid rgb(255, 252, 252);
+		}
+	}
+	&__image {
+		padding: 0 0 37.51% 0;
+	}
+	@media (max-width: 1500px) {
+		&__content {
+			padding: 40px 35px 30px 35px;
+		}
+	}
+	@media (max-width: 1100px) {
+		&__last {
+			.brends__column {
+				&:nth-child(1) {
+					order: 2;
+				}
+				&:nth-child(2) {
+					order: 1;
+				}
+				&:nth-child(3) {
+					order: 3;
+				}
+			}
+		}
+		&__row {
+			flex-direction: column;
+		}
+	}
+}
+.item {
+	height: 100%;
+	display: block;
+	position: relative;
+	&__logo {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: #64c29e62;
+		@include flexbox();
+		flex-direction: column;
+		transition: 0.3s 0s;
+		justify-content: center;
+		align-items: center;
+		z-index: 2;
+		opacity: 0;
+		visibility: hidden;
+		span {
+			margin: 12px 0 0 0;
+			font-size: 14px;
+			font-weight: 700;
+			letter-spacing: 2.8px;
+			text-transform: uppercase;
+			color: #ffffff;
+		}
+	}
+	&__image {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+	}
+	&:hover {
+		.item__logo {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+	@media (max-width: 1100px) {
+		height: auto;
+		padding: 0 0 70% 0;
+	}
+}
+//===============================================================================
+//Слайдер блок>==================================================================
+
+.slider {
+	background-color: #f7f7f7;
+	padding: 120px 0 70px 0;
+	text-align: center;
+	&__icon {
+		margin: 0 0 35px 0;
+	}
+	&__title {
+		margin: 0 0 27px 0;
+		color: #353738;
+		font-size: 18px;
+		font-weight: 700;
+		span {
+			color: #848789;
+			font-weight: 300;
+			letter-spacing: 1.8px;
+		}
+	}
+	&__text {
+		text-align: center;
+		color: #848789;
+		font-size: 24px;
+		font-style: italic;
+		line-height: 34px;
+	}
+	@media (max-width: 1100px) {
+		padding: 80px 0 60px 0;
+	}
+	@media (max-width: 600px){
+		padding: 50px 0 50px 0;
+
+	}
+}
+//===========================
+.slick-slider {
+	position: relative;
+	.slick-list {
+		overflow: hidden;
+	}
+	.slick-track {
+		display: flex;
+		align-items: flex-start;
+	}
+	.slick-dots {
+		margin: 104px 0 0 0;
+		display: flex;
+		font-size: 0;
+		align-items: center;
+		justify-content: center;
+		li {
+			margin: 0 5px;
+			button {
+				font-size: 0;
+				width: 10px;
+				height: 10px;
+				border: 1px solid #a9afb3;
+				border-radius: 50%;
+				background-color: transparent;
+			}
+			&.slick-active {
+				button {
+					background-color: #a9afb3;
+				}
+			}
+		}
+		@media (max-width: 1100px) {
+			margin: 75px 0 0 0;
+		}
+		@media (max-width: 600px) {
+			margin: 45px 0 0 0;
+		}
+	}
+}
+
+//===============================================================================
+//Shops>=========================================================================
+.shop {
+	//height: 100%;
+	&__body {
+		@include flexbox();
+	}
+	&__column {
+		flex: 0 1 16.666%;
+		&-b {
+			flex: 0 1 33.333%;
+		}
+	}
+	&__footer {
+		background-color: #282f35;
+		padding: 75px 0;
+		text-align: center;
+	}
+	&__btn {
+		display: inline-block;
+		height: 50px;
+		line-height: 48px;
+		border: 1px solid rgba(255, 255, 255, 0.5);
+
+		letter-spacing: 2.8px;
+		font-size: 14px;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: #ffffff;
+		padding: 0 60px;
+	}
+	@media (max-width: 1100px) {
+		&__body {
+			flex-wrap: wrap;
+		}
+		&__footer {
+			padding: 50px 0;
+		}
+		&__column {
+			flex: 0 1 50%;
+			&:first-child {
+				flex: 1 1 100%;
+			}
+			&:last-child {
+				flex: 1 1 100%;
+			}
+		}
+		&__btn {
+			padding: 0 30px;
+		}
+	}
+}
+.block-shop {
+	height: 100%;
+	&__row {
+		@include flexbox();
+	}
+	&__column {
+		flex: 0 1 50%;
+	}
+	&__item {
+		height: auto;
+		padding: 0 0 50% 0;
+		&-b {
+			padding: 0px 0px 200.3% 0px;
+		}
+		&-l {
+			padding: 0 0 100% 0;
+		}
+	}
+}
+//Subscribe>=====================================================================
+.subscribe {
+	&__body {
+		padding: 110px 0;
+		max-width: 534px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	&__logo {
+		margin: 0 0 39px 0;
+	}
+	&__label {
+		color: #848789;
+		font-size: 24px;
+		font-style: italic;
+		margin: 0 0 35px 0;
+	}
+	&__form {
+		@include flexbox();
+	}
+	&__input {
+		flex: 1 1 auto;
+		padding: 0 8px 0 0;
+		.input {
+			width: 100%;
+			height: 69px;
+			border: 1px solid #d3d7d9;
+			background-color: #ffffff;
+			padding: 0px 28px;
+			color: #929292;
+			font-size: 20px;
+			font-style: italic;
+			&:focus {
+				font-style: normal;
+				color: #333;
+			}
+		}
+	}
+	&__button {
+		flex: 0 0 126px;
+	}
+	&__btn {
+		width: 100%;
+		height: 69px;
+		line-height: 69px;
+		background-color: #64c29e;
+
+		color: #ffffff;
+		font-size: 24px;
+		line-height: 24px;
+		font-weight: 300;
+		text-transform: uppercase;
+	}
+	@media (max-width: 750px) {
+		&__body {
+			padding: 50px 0;
+		}
+	}
+	@media (max-width: 500px) {
+		&__input {
+			padding: 0 0 8px 0;
+		}
+		&__form {
+			display: block;
+		}
+	}
+}
+
+//Footer>========================================================================
+@import "footer.scss";
+
+//===============================================================================
